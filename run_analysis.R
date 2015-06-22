@@ -103,6 +103,9 @@ run_analysis  <- function() {
     tidy_data_final <- merge(tidy_data_final,activity_labels,by.x = "activity_id",by.y = "V1",all = TRUE)
     tidy_data_final <- tidy_data_final[,2:ncol(tidy_data_final)]
     
-    write.table(tidy_data_final,"tidy_data.txt",row.names = FALSE)
+    ##write.table(tidy_data_final,"tidy_data.txt",row.names = FALSE,sep = '\t')
     
+    mean_variable  <- aggregate(tidy_data_final[,1:79],by = list(tidy_data_final$activity,tidy_data_final$subject_id),mean)
+    
+    write.table(mean_variable,"tidy_data_with_mean.txt",row.names = FALSE,sep = '\t')
 }
